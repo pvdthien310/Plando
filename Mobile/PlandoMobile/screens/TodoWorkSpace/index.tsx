@@ -4,6 +4,7 @@ import { useData } from '../../hooks/useData'
 import { TodoWorkSpaceProps } from '../../navigation/types'
 import { SessionItem } from './components'
 import styles from './style'
+import { FontAwesome } from '@expo/vector-icons';
 
 interface todo {
     accountId?: any,
@@ -35,14 +36,11 @@ export default function TodoWorkSpace({
                     <View style={styles.line}></View>
                 </View>
             </View>
-            <TouchableOpacity >
-                <Text style={{ backgroundColor: 'black' }} onPress={() => fetchData()}
-                >aaaa</Text>
-            </TouchableOpacity>
             {
                 loading ? <ActivityIndicator size="small" color="#0000ff" />
                     :
                     <FlatList
+                        style={{ width: '100%' }}
                         showsVerticalScrollIndicator={false}
                         data={data.sessions ? data.sessions : []}
                         renderItem={({ item }) => (
@@ -53,6 +51,20 @@ export default function TodoWorkSpace({
                         refreshing={loading}
                     />
             }
+            
+                <TouchableOpacity style={{
+                    backgroundColor: '#B6E9E0',
+                    borderRadius: 90,
+                    padding: 20,
+                    position: 'absolute',
+                    alignSelf: 'flex-end',
+                    bottom: 0,
+                    right:2,
+                    margin:10
+                }}>
+                    <FontAwesome name="plus" size={20} color="black" />
+                </TouchableOpacity>
+            
         </View>
     )
 }
