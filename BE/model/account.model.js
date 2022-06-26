@@ -44,6 +44,12 @@ Account.method('AddTodo', async function (todoId, next) {
   next();
 })
 
+Account.method('AddSession', async function (sessionId, next) {
+  this['sessions'].push(mongoose.Types.ObjectId(sessionId))
+  this.save()
+  next();
+})
+
 Account.methods.createToken = function () {
   return jwt.sign({
     email: this.email,

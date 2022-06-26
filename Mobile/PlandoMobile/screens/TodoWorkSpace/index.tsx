@@ -5,6 +5,8 @@ import { TodoWorkSpaceProps } from '../../navigation/types'
 import { SessionItem } from './components'
 import styles from './style'
 import { FontAwesome } from '@expo/vector-icons';
+import { useState } from 'react'
+import AddTodoModal from './components/addTodoModal'
 
 interface todo {
     accountId?: any,
@@ -21,6 +23,7 @@ export default function TodoWorkSpace({
 }: TodoWorkSpaceProps<'TodoWorkSpace'>) {
 
     const { fetchData, loading, error, data } = useData()
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <View style={styles.container}>
@@ -51,20 +54,23 @@ export default function TodoWorkSpace({
                         refreshing={loading}
                     />
             }
-            
-                <TouchableOpacity style={{
-                    backgroundColor: '#B6E9E0',
-                    borderRadius: 90,
-                    padding: 20,
-                    position: 'absolute',
-                    alignSelf: 'flex-end',
-                    bottom: 0,
-                    right:2,
-                    margin:10
-                }}>
-                    <FontAwesome name="plus" size={20} color="black" />
-                </TouchableOpacity>
-            
+
+            <TouchableOpacity style={{
+                backgroundColor: '#B6E9E0',
+                borderRadius: 90,
+                padding: 20,
+                position: 'absolute',
+                alignSelf: 'flex-end',
+                bottom: 0,
+                right: 2,
+                margin: 10
+            }}
+                onPress={() => setOpenModal(true)}
+            >
+                <FontAwesome name="plus" size={20} color="white" />
+            </TouchableOpacity>
+            <AddTodoModal open={openModal} setOpen={setOpenModal} fetchData={fetchData}/>
+
         </View>
     )
 }

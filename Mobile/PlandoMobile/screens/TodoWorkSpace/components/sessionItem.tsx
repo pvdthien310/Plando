@@ -22,7 +22,6 @@ const SessionItem = (props: Props) => {
             {
                 open &&
                 <View style={styles.session_todoFrame}>
-
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={props.item.todos ? props.item.todos : []}

@@ -30,11 +30,17 @@ const sessionController = {
                 accountId: mongoose.Types.ObjectId(accountId),
                 name: name
             })
-            const result = await newSession.save()
-            if (result === newSession) {
-                SendResponse("Add Session for `${accountId}` successfully", 200, res)
+            const belongedAccount = await Account.findOne({ _id: accountId })
+            if (belongedAccount != null) {
+                const result = await newSession.save()
+                if (result === newSession) {
+                    belongedAccount.AddSession(result._id, next)
+                    SendResponse("Add Session for account successfully", 200, res)
+                }
+                else next(new AppError("Error While creating session", 404))
             }
-            else next(new AppError("Error While creating session", 404))
+            else
+                next(new AppError("Account is not existed!", 404))
         }
         catch (err) {
             next(next(new AppError("Error while creating session!", 500)))

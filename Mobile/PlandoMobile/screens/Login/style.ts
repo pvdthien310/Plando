@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 3,
     },
+   
 })
 export default styles

@@ -59,6 +59,67 @@ const styles = StyleSheet.create({
         backgroundColor: '#A9E9E0',
         width: '100%',
         marginTop: 5
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 20
+    },
+    modalView: {
+        margin: 10,
+        backgroundColor: "white",
+        borderRadius: 10,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        width: '70%',
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+        margin: 5
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    addSession_buttonClose: {
+        backgroundColor: 'maroon',
+        borderRadius: 10,
+        padding: 10,
+        width: '65%',
+        alignItems: 'center',
+        marginTop: '3%',
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    },
+    addSession_title: {
+        marginBottom: 10,
+        fontWeight: 'bold',
+        fontSize: 15
+    },
+    addSession_textfield: {
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 10,
+        width: '100%',
+        marginBottom: '3%',
+        color: 'black',
     }
 
 })
