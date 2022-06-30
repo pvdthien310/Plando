@@ -1,1 +1,1 @@
-export {default as SessionItem} from './sessionItem'
+export { default as SessionItem } from './sessionItem';

@@ -20,11 +20,11 @@ const todoController = {
             next(new AppError("Error load todo!", 500))
         }
     }),
-   
-    create: catchAsync(async (req, res, next) => {
-        const { body, start, end, point, sessionId, accountId } = req.body
 
-        if (!body || !start || !end || !point || !sessionId || !accountId || start > end)
+    create: catchAsync(async (req, res, next) => {
+        const { body, title, start, end, point, sessionId, accountId } = req.body
+
+        if (!body || !start || !title || !end || !point || !sessionId || !accountId || start > end)
             next(new AppError("Some params are missing or start day is after end day!", 404))
 
         try {
@@ -35,7 +35,8 @@ const todoController = {
                 point: point,
                 sessionId: mongoose.Types.ObjectId(sessionId),
                 isDone: false,
-                isExpired: false
+                isExpired: false,
+                title: title
             })
             const belongedAccount = await Account.findOne({ _id: accountId })
             const belongedSession = await Session.findOne({ _id: sessionId })

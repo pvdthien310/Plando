@@ -1,26 +1,26 @@
-import axios from 'axios'
-import { AsyncStorage } from 'react-native'
-import { local_base_URL } from '../constant.js'
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
+import { local_base_URL } from '../constant.js';
 
 const DatabaseClient = axios.create({
-    baseURL: local_base_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
+  baseURL: local_base_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
 
 DatabaseClient.interceptors.request.use(
-    async (config: any) => {
-        let token = await AsyncStorage.getItem('accessToken')
-        if (token) {
-            config.headers['x-access-token'] = token
-        }
-        return config
-    },
-    (error) => {
-        return Promise.reject(error)
+  async (config: any) => {
+    let token = await AsyncStorage.getItem('accessToken');
+    if (token) {
+      config.headers['x-access-token'] = token;
     }
-)
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // DatabaseClient.interceptors.response.use(
 //     res => {
@@ -46,4 +46,4 @@ DatabaseClient.interceptors.request.use(
 //     }
 // )
 
-export default DatabaseClient
+export default DatabaseClient;

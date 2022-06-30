@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const Todo = new Schema({
-  accountId:  {
-    type : mongoose.Types.ObjectId,
+  accountId: {
+    type: mongoose.Types.ObjectId,
     ref: "Account"
   }, // String is shorthand for {type: String}
   body: String,
@@ -15,7 +15,8 @@ const Todo = new Schema({
     ref: 'Session'
   },
   isDone: Boolean,
-  isExpired: Boolean
+  isExpired: Boolean,
+  title: String
 });
 
 module.exports = mongoose.model('Todo', Todo);
