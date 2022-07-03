@@ -14,8 +14,15 @@ declare type todo = {
 
 const todoApi = {
   addTodo: async (data: todo) => {
-    console.log(data)
     const res = await DatabaseClient.post('/' + baseURL, data).catch((err) => {
+      return err.response;
+    });
+    return res;
+  },
+  setDone: async (id: string) => {
+    const res = await DatabaseClient.post(
+      '/' + baseURL + '/set-done/' + id
+    ).catch((err) => {
       return err.response;
     });
     return res;

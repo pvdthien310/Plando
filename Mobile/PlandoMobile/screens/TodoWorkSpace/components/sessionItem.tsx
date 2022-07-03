@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   Alert,
   Button,
@@ -18,6 +18,16 @@ interface Props {
 
 const SessionItem = (props: Props) => {
   const [open, setOpen] = useState(false);
+  const [isDone, SetIsDone] = useState(false);
+
+  const CheckIsDone = useMemo(async () => {
+    let val = false;
+    await props.item.todos.map((ite: any) => {
+      if (new Date() > ite.end || ite.isDone) val = true;
+      else val = false;
+    });
+    SetIsDone(val);
+  }, [props.item.todos]);
 
   const handleOpen = useCallback(() => {
     if (props.item.todos.length > 0) setOpen((prev) => !prev);
@@ -32,7 +42,13 @@ const SessionItem = (props: Props) => {
         onPress={handleOpen}
       >
         <View style={styles.sessionItem_frame}>
-          <Text style={styles.sessionItem_text}>{props.item.name}</Text>
+          <Text
+            style={
+              !isDone ? styles.sessionItem_text : styles.sessionItem_text_done
+            }
+          >
+            {props.item.name}
+          </Text>
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate('AddTodo', {

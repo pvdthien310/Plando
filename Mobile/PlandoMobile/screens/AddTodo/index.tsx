@@ -24,7 +24,7 @@ export default function AddTodo({
   const userId = useAppSelector((state) => state.account.user._id);
   const { fetchData } = useData();
   const [selectedType, SetSelectedType] = useState<Number>(1);
-  const [tittle, SetTittle] = useState('');
+  const [title, SetTitle] = useState('');
   const [body, SetBody] = useState('');
   const [selectedDate, SetSelectedDate] = useState({
     start: new Date(),
@@ -37,37 +37,31 @@ export default function AddTodo({
 
   const isValidDate = useCallback(
     (start: Date, end: Date) => {
-      console.log(start);
-      console.log(end);
       return end > start ? true : false;
     },
     [selectedDate]
   );
 
-  useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
-
   const validateSave = useCallback(async () => {
-    const isValidTitle = isValidField(tittle);
+    const isValidTitle = isValidField(title);
     const isValidBody = isValidField(body);
     const isValidSelectedDate = isValidDate(
       selectedDate.start,
       selectedDate.end
     );
     if (isValidTitle && isValidBody && isValidSelectedDate)
-      await handleAddTodo()
+      await handleAddTodo();
     else
       Alert.alert(
         'Notification',
         'Missing or invalid information please check again!'
       );
-  }, [tittle, isValidDate, isValidField, body, selectedDate]);
+  }, [title, isValidDate, isValidField, body, selectedDate]);
 
   const handleAddTodo = async () => {
     try {
       const response = await todoApi.addTodo({
-        title: tittle,
+        title: title,
         body: body,
         start: selectedDate.start,
         end: selectedDate.end,
@@ -76,7 +70,7 @@ export default function AddTodo({
         accountId: userId
       });
       if (response.status == 200) {
-        fetchData()
+        await fetchData();
         Alert.alert('Notification', 'Add your to do successfully ! :33', [
           { text: 'OK' }
         ]);
@@ -110,7 +104,7 @@ export default function AddTodo({
           <TextInput
             multiline
             style={styles.panel_3_textfield}
-            onChangeText={SetTittle}
+            onChangeText={SetTitle}
           ></TextInput>
           <View style={styles.panel_3_frame}>
             <Text style={styles.panel_3_title}>Message</Text>

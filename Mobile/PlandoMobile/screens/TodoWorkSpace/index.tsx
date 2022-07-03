@@ -10,8 +10,9 @@ import { TodoWorkSpaceProps } from '../../navigation/types';
 import { SessionItem } from './components';
 import styles from './style';
 import { FontAwesome } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddSessionModal from './components/addSessionModal';
+import { useAppSelector } from '../../hooks/useSelector';
 
 interface todo {
   accountId?: any;
@@ -26,7 +27,8 @@ interface todo {
 export default function TodoWorkSpace({
   navigation
 }: TodoWorkSpaceProps<'TodoWorkSpace'>) {
-  const { fetchData, loading, error, data } = useData();
+  const user = useAppSelector((state) => state.account.user);
+  const { fetchData, loading } = useData();
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -47,7 +49,7 @@ export default function TodoWorkSpace({
         <FlatList
           style={{ width: '100%' }}
           showsVerticalScrollIndicator={false}
-          data={data.sessions ? data.sessions : []}
+          data={user.sessions ? user.sessions : []}
           renderItem={({ item }) => (
             <SessionItem key={item._id} item={item} navigation={navigation} />
           )}

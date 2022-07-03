@@ -15,10 +15,9 @@ const Session = new Schema({
   ]
 });
 
-Session.method('AddTodo', function (todoId, next) {
+Session.method('AddTodo', async function (todoId, next) {
   this['todos'].push(mongoose.Types.ObjectId(todoId))
-  this.save()
-  next();
+  return (await this.save()) ? true : false
 })
 
 module.exports = mongoose.model('Session', Session);

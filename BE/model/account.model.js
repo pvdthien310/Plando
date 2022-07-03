@@ -38,16 +38,15 @@ Account.pre('save', function (next) {
   next();
 })
 
-Account.method('AddTodo', async function (todoId, next) {
+Account.method('AddTodo', async function (todoId) {
   this['todos'].push(mongoose.Types.ObjectId(todoId))
-  this.save()
-  next();
+  return (await this.save()) ? true : false
 })
 
 Account.method('AddSession', async function (sessionId, next) {
   this['sessions'].push(mongoose.Types.ObjectId(sessionId))
-  this.save()
-  next();
+  const result = await this.save()
+  return result
 })
 
 Account.methods.createToken = function () {

@@ -32,6 +32,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   },
+  sessionItem_text_done: {
+    fontSize: 17,
+    color: 'white',
+    fontWeight: 'bold',
+    textDecorationLine: 'line-through'
+  },
   session_todoFrame: {
     borderRadius: 10,
     width: '80%',
@@ -57,6 +63,20 @@ const styles = StyleSheet.create({
     color: '#29666A',
     fontWeight: 'bold',
     fontSize: 15
+  },
+  todoItem_title_done: {
+    color: '#29666A',
+    fontWeight: 'bold',
+    fontSize: 15,
+    textDecorationLine: 'line-through'
+  },
+  todoItem_body: {
+    color: '#29666A',
+    fontWeight: 'bold',
+    fontSize: 12,
+    fontStyle: 'italic',
+    padding: 10,
+    paddingBottom: 5
   },
   todoItem_line: {
     height: 2,

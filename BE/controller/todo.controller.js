@@ -6,6 +6,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const SendResponse = require('../utils/SendResponse');
 const { default: mongoose } = require('mongoose');
+const todoModel = require('./../model/todo.model');
 
 const todoController = {
     getAll: catchAsync(async (req, res, next) => {
@@ -40,22 +41,41 @@ const todoController = {
             })
             const belongedAccount = await Account.findOne({ _id: accountId })
             const belongedSession = await Session.findOne({ _id: sessionId })
-
+            
             if (belongedAccount != null && belongedSession != null) {
                 const result = await newTodo.save()
                 if (result === newTodo) {
-                    belongedAccount.AddTodo(result._id, next)
-                    belongedSession.AddTodo(result._id, next)
-                    SendResponse("Add todo successfully!", 200, res)
+                    if (await belongedAccount.AddTodo(result._id, next) && await belongedSession.AddTodo(result._id, next))
+                        SendResponse("Add todo successfully!", 200, res)
+                    else   next(new AppError("Error while creating Todo 3!", 500))
                 }
                 else
-                    next(new AppError("Error while creating Todo!", 500))
+                    next(new AppError("Error while creating Todo 2!", 500))
             }
             else
                 next(new AppError("Account is not existed!", 404))
         }
         catch (err) {
-            next(next(new AppError("Error while creating Todo!", 500)))
+            next(new AppError("Error while creating Todo!" + err, 500))
+        }
+    }),
+    setIsDone: catchAsync(async (req, res, next) => {
+        const { id } = req.params
+
+        if (!id) next(new AppError("Some params are missing!", 404))
+
+        try {
+            const result = await Todo.findById(id)
+
+            if (result != null) {
+                const response = await Todo.findByIdAndUpdate(id, { isDone: !result.isDone }, { new: true })
+                if (response)
+                    SendResponse("Set Todo successfully!", 200, res)
+                else next(new AppError("Error while setting Todo!", 500))
+            }
+        }
+        catch (err) {
+            next(new AppError("Error set for Todo!", 500))
         }
     })
 }
