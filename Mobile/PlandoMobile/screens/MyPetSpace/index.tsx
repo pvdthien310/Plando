@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { PetSpaceProps } from '../../navigation/types';
 
@@ -8,6 +8,7 @@ export default function MyPetSpace({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My pet Space</Text>
+      <Image source={require('../../assets/gifs/pet_1.gif')} />
       <View
         style={styles.separator}
         lightColor="#eee"

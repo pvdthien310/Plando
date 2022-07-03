@@ -4,12 +4,14 @@ import styles from './style';
 import { useState } from 'react';
 import todoApi from '../../../api/todoApi';
 import { useData } from '../../../hooks/useData';
+import { useAppSelector } from '../../../hooks/useSelector';
 
 interface Props {
   item?: any;
 }
 
 const TodoItem = (props: Props) => {
+  const userId = useAppSelector(state => state.account.user._id)
   const { fetchData } = useData();
   const [isDone, SetIsDone] = useState<boolean>(props.item.isDone);
   const [isExpired, SetIsExpired] = useState<boolean>(
@@ -17,7 +19,7 @@ const TodoItem = (props: Props) => {
   );
 
   const handleToggleIsDone = () => {
-    if (isExpired) return;
+    if (isExpired || isDone) return;
     var func = setInterval(function () {
       SetIsDone((prev) => !prev);
     }, 1500);
@@ -27,7 +29,7 @@ const TodoItem = (props: Props) => {
   };
 
   const updateDatabase = async () => {
-    const response = await todoApi.setDone(props.item._id);
+    const response = await todoApi.setDone({id: props.item._id, userId: userId});
 
     if (response.status != 200) console.log('Error Set Date');
     else {

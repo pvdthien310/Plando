@@ -5,7 +5,7 @@ const todoController = require('../controller/todo.controller');
 module.exports = app => {
   router.get("/", todoController.getAll);
   router.post("/", todoController.create);
-  router.post("/set-done/:id",todoController.setIsDone)
+  router.post("/set-done",todoController.setIsDone)
 
   app.use('/api/todo', router)
 };

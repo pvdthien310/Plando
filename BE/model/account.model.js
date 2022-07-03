@@ -45,8 +45,12 @@ Account.method('AddTodo', async function (todoId) {
 
 Account.method('AddSession', async function (sessionId, next) {
   this['sessions'].push(mongoose.Types.ObjectId(sessionId))
-  const result = await this.save()
-  return result
+  return (await this.save()) ? true : false
+})
+
+Account.method('AddPoint', async function (point) {
+  this['totalPoint'] = this['totalPoint'] + point
+  return (await this.save()) ? true : false
 })
 
 Account.methods.createToken = function () {

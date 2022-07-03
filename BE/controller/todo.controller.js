@@ -60,19 +60,28 @@ const todoController = {
         }
     }),
     setIsDone: catchAsync(async (req, res, next) => {
-        const { id } = req.params
+        const { id, userId } = req.body
+        console.log(userId + id)
 
         if (!id) next(new AppError("Some params are missing!", 404))
 
         try {
-            const result = await Todo.findById(id)
+            const belongedAccount = await Account.findOne({ _id: userId })
+            if (belongedAccount != null) {
+                const result = await Todo.findById(id)
 
-            if (result != null) {
-                const response = await Todo.findByIdAndUpdate(id, { isDone: !result.isDone }, { new: true })
-                if (response)
-                    SendResponse("Set Todo successfully!", 200, res)
-                else next(new AppError("Error while setting Todo!", 500))
+                if (result != null) {
+                    await belongedAccount.AddPoint(result.point)
+                    
+                    const response = await Todo.findByIdAndUpdate(id, { isDone: !result.isDone }, { new: true })
+                    if (response)
+                        SendResponse("Set Todo successfully!", 200, res)
+                    else next(new AppError("Error while setting Todo 1!", 500))
+                }
+                else next(new AppError("Error while setting Todo 2!", 500))
             }
+            else next(new AppError("Account not existed!", 500))
+            
         }
         catch (err) {
             next(new AppError("Error set for Todo!", 500))

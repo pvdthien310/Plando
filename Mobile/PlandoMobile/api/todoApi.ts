@@ -19,9 +19,9 @@ const todoApi = {
     });
     return res;
   },
-  setDone: async (id: string) => {
+  setDone: async (data: any) => {
     const res = await DatabaseClient.post(
-      '/' + baseURL + '/set-done/' + id
+      '/' + baseURL + '/set-done',data
     ).catch((err) => {
       return err.response;
     });
