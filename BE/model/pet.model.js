@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const Pet = new Schema({
   petTypeId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "PetType"
   },
   exp: Number,

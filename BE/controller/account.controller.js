@@ -20,15 +20,23 @@ const accountController = {
     getById: catchAsync(async (req, res, next) => {
         try {
             const id = req.params.id
-            const result = await Account.findById(id).populate('todos').populate('pets')
-            .populate('sessions')
-            .populate({
-                path: 'sessions',
-                populate: {
-                    path: 'todos',
-                    model: 'Todo'
-                },
-            })
+            const result = await Account.findById(id).populate('todos')
+                .populate('sessions')
+                .populate({
+                    path: 'sessions',
+                    populate: {
+                        path: 'todos',
+                        model: 'Todo'
+                    },
+                })
+                .populate('pets')
+                .populate({
+                    path: 'pets',
+                    populate: {
+                        path: 'petTypeId',
+                        model: 'PetType'
+                    },
+                })
 
             if (result)
                 SendResponse(result, 200, res)

@@ -21,7 +21,8 @@ const todoApi = {
   },
   setDone: async (data: any) => {
     const res = await DatabaseClient.post(
-      '/' + baseURL + '/set-done',data
+      '/' + baseURL + '/set-done',
+      data
     ).catch((err) => {
       return err.response;
     });

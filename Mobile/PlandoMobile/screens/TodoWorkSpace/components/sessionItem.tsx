@@ -21,12 +21,14 @@ const SessionItem = (props: Props) => {
   const [isDone, SetIsDone] = useState(false);
 
   const CheckIsDone = useMemo(async () => {
-    let val = false;
+    if (props.item.todos.length == 0) return;
+    let count = 0;
     await props.item.todos.map((ite: any) => {
-      if (new Date() > ite.end || ite.isDone) val = true;
-      else val = false;
+      if (new Date() > ite.end || ite.isDone) {
+      } else count++;
     });
-    SetIsDone(val);
+
+    if (count == 0) SetIsDone(true);
   }, [props.item.todos]);
 
   const handleOpen = useCallback(() => {

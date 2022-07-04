@@ -11,7 +11,7 @@ interface Props {
 }
 
 const TodoItem = (props: Props) => {
-  const userId = useAppSelector(state => state.account.user._id)
+  const userId = useAppSelector((state) => state.account.user._id);
   const { fetchData } = useData();
   const [isDone, SetIsDone] = useState<boolean>(props.item.isDone);
   const [isExpired, SetIsExpired] = useState<boolean>(
@@ -29,7 +29,10 @@ const TodoItem = (props: Props) => {
   };
 
   const updateDatabase = async () => {
-    const response = await todoApi.setDone({id: props.item._id, userId: userId});
+    const response = await todoApi.setDone({
+      id: props.item._id,
+      userId: userId
+    });
 
     if (response.status != 200) console.log('Error Set Date');
     else {

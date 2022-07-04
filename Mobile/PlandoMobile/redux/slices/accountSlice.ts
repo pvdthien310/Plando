@@ -5,6 +5,7 @@ import accountApi from '../../api/accountApi';
 export type UserType = {
   _id?: string;
   sessions?: any;
+  pets?: any;
 };
 const defaultValue: UserType = {};
 
