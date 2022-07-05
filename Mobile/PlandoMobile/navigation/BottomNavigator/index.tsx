@@ -1,7 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
-import { BottomNavigatorParamList, BottomNavigatorProps, PetSpaceProps } from '../types';
+import {
+  BottomNavigatorParamList,
+  BottomNavigatorProps,
+  PetSpaceProps
+} from '../types';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Pressable, View } from 'react-native';
 import PetShop from '../../screens/PetShop';

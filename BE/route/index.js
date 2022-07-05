@@ -5,6 +5,7 @@ function router(app) {
     require("./session.route")(app);
     require("./pet.route")(app);
     require("./petType.route")(app);
+    require("./meal.route")(app);
   }
   
   module.exports = router;

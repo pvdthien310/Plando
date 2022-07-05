@@ -167,56 +167,5 @@ export const accountSlice = createSlice({
       state.loading = false;
       if (payload) state.errorMessage = payload.message;
     });
-
-    // [getAccountWithID.pending]: (state, action) => {
-    //   state.loading = true;
-    //   state.isRegSuccess = false;
-    // },
-    // [getAccountWithID.fulfilled]: (state, action) => {
-    //   state.user = action.payload;
-    //   state.loading = false;
-    //   state.isRegSuccess = true;
-    // },
-    // [getAccountWithID.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload.message;
-    //   state.isRegSuccess = false;
-    // },
-    // [getAccountWithEmail.pending]: (state, action) => {
-    //   state.loading = true
-    // },
-    // [getAccountWithEmail.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    // },
-    // [getAccountWithEmail.rejected]: (state, action) => {
-    //   state.loading = false;
-    // },
-    // [updateAccount.pending]: (state) => {
-    //   state.loading = true;
-    //   console.log(" pending...");
-    // },
-    // [updateAccount.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.user = action.payload;
-    //   console.log(" fulfilled: " + state.user);
-    // },
-    // [updateAccount.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.errorMessage = action.payload;
-    //   console.log("rejected: " + state.errorMessage);
-    // },
-    // [updatePassword.pending]: (state) => {
-    //   state.loading = true;
-    //   console.log(" pending...");
-    // },
-    // [updatePassword.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   console.log(" fulfilled: " + state.user);
-    // },
-    // [updatePassword.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.errorMessage = action.payload;
-    //   console.log("rejected: " + state.errorMessage);
-    // },
   }
 });

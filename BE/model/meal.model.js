@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Meal = new Schema({
   price: Number,
-  name: Number,
+  name: String,
   exp: Number,
   url: String
 });
